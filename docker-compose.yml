@@ -1,9 +1,11 @@
 version: '3.8'
+
 services:
-  app:
+  builder:
     build: .
-    ports:
-      - "8087:8000"
     environment:
-      - PYTHONUNBUFFERED=1
-    restart: unless-stopped
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./:/app
+    # Note: Running GUI apps in Docker requires X11 forwarding configured on the host.
